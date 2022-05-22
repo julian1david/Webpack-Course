@@ -3,6 +3,8 @@ const path = require('path'); //Ya viene disponible en node
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Dotenv = require('dotenv-webpack');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+
 
 
 //Exportar un objeto con la configuracion deseada.
@@ -18,7 +20,8 @@ module.exports = {
         assetModuleFilename: 'assets/images/[hash][ext][query]',
     },
     mode: 'development',
-    watch: true,
+    devtool: "source-map",
+    /* watch: true, */
     resolve: {
         //Establecer que extensiones vamos a usar ejemplo en react (JSX)
         extensions: ['.js'],
@@ -27,6 +30,7 @@ module.exports = {
             '@templates' : path.resolve(__dirname, 'src/templates/'),
             '@styles' : path.resolve(__dirname, 'src/styles/'),
             '@images' : path.resolve(__dirname, 'src/assets/images/'),
+            '@components' : path.resolve(__dirname, 'src/components/'),
         }
     },
     //Add configuracion de babel
@@ -36,7 +40,7 @@ module.exports = {
             {
                 //Es importante trabajar con expresiones regulares
                 //El test nos permite saber que tipo de extensiones voy a trabajar
-                test: /\.m?js$/,   //utiliza cualqquier extension que sea mjs (modules) o js  
+                test: /\.m?(js|jsx)$/,  //utiliza cualqquier extension que sea mjs (modules) o js  
                 //Ahora vamos a excluir 
                 exclude: /node_modules/,
                 use: {
@@ -60,7 +64,13 @@ module.exports = {
                 generator: {
                     filename: "assets/fonts/[name].[contenthash].[ext]"
                 }
-            }
+            },
+            {
+				test: /\.html$/,
+				use: {
+					loader: 'html-loader'
+				}
+			}
         ],
     },
     plugins: [
@@ -83,5 +93,14 @@ module.exports = {
             ]
         }) */
         new Dotenv(),
+        new BundleAnalyzerPlugin(),
     ],
+    devServer: {
+        static: path.join(__dirname, 'dist'),
+        compress: true,
+        historyApiFallback: true,
+        port: 3006,
+        watchFiles: path.join(__dirname, "./**"), //para recargar el navegador automáticamente
+        open: true //abrir el navegador al correr el script
+    }
 }

@@ -23,12 +23,13 @@ module.exports = {
     },
     resolve: {
         //Establecer que extensiones vamos a usar ejemplo en react (JSX)
-        extensions: ['.js'],
+        extensions: ['.js', '.jsx'],
         alias: {
             '@utils' : path.resolve(__dirname, 'src/utils/'),
             '@templates' : path.resolve(__dirname, 'src/templates/'),
             '@styles' : path.resolve(__dirname, 'src/styles/'),
             '@images' : path.resolve(__dirname, 'src/assets/images/'),
+            '@components' : path.resolve(__dirname, 'src/components/'),
         }
     },
     //Add configuracion de babel
@@ -38,7 +39,7 @@ module.exports = {
             {
                 //Es importante trabajar con expresiones regulares
                 //El test nos permite saber que tipo de extensiones voy a trabajar
-                test: /\.m?js$/,   //utiliza cualqquier extension que sea mjs (modules) o js  
+                test: /\.m?(js|jsx)$/, //utiliza cualqquier extension que sea mjs (modules) o js  test: /\.m?(js|jsx)$/,test: /\.m?js$/, 
                 //Ahora vamos a excluir 
                 exclude: /node_modules/,
                 use: {
@@ -62,7 +63,14 @@ module.exports = {
                 generator: {
                     filename: "assets/fonts/[name].[contenthash].[ext]"
                 }
-            }
+            },
+            {
+				test: /\.html$/,
+				use: {
+					loader: 'html-loader'
+				}
+			}
+            
         ],
     },
     plugins: [
