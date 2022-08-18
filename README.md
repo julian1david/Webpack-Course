@@ -38,7 +38,7 @@ Cualquier contirbución al proyecto es bien recibida !
 
 ## Autor ✒️
 
-* **Julian F**  - [julian1f](https://github.com/julian1david)
+* **Julian F**  - [julian1f](https://github.com/julianf-dev)
 
 
 ## Licencia 📄
@@ -46,4 +46,4 @@ Cualquier contirbución al proyecto es bien recibida !
 Este proyecto está bajo la Licencia (MIT) - mira el archivo [LICENSE](LICENSE) para detalles
 
 ---
-Hecho con ❤️ por [julian1f](https://github.com/julian1david) 😊
+Hecho con ❤️ por [julian1f](https://github.com/julianf-dev) 😊
